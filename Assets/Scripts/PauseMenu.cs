@@ -51,8 +51,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
 
         pauseMenu = GameObject.Find("Pause");
-        optionsPanel = 
+        //optionsPanel = 
 
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
     }
 }

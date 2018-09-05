@@ -3,7 +3,7 @@ using System.Collections;
 //this script can be found in the Component section under the option Character Set Up 
 //Mouse Look
 
-[AddComponentMenu("FirstPersonCamera")]
+[AddComponentMenu("Skyrim2.0/FirstPersonCamera")]
 
 public class MouseLook : MonoBehaviour
 {

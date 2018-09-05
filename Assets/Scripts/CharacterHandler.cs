@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 //this script can be found in the Component section under the option Character Set Up 
 //Character Handler
-[AddComponentMenu("FirstPerson/PlayerHealth")]
+[AddComponentMenu("Skyrim2.0/FirstPerson/PlayerHealth")]
 public class CharacterHandler : MonoBehaviour
 {
     [Header("Character")]
@@ -26,6 +26,18 @@ public class CharacterHandler : MonoBehaviour
     public int level;
     //max and current experience 
     public int maxExp, curExp;
+    //Skill points to increase stats
+    public int skillPoint;
+    #endregion
+    [Header("Stats)")]
+    #region Stats
+    //Listing Each of the stats
+    public int Strength;
+    public int Dexterity;
+    public int Constitution;
+    public int Intelligence;
+    public int Wisdom;
+    public int Charisma;
     #endregion
     [Header("Camera Connection")]
     #region MiniMap
@@ -48,7 +60,7 @@ public class CharacterHandler : MonoBehaviour
     }
     #endregion
     #region Update
-    private void update()
+    private void Update()
     {
         //if our current experience is greater or equal to the maximum experience
         if (curExp >= maxExp)
@@ -59,6 +71,8 @@ public class CharacterHandler : MonoBehaviour
             level++;
             //the maximum amount of experience is increased by 50
             maxExp += 50;
+            //Give a skill point on level up
+            skillPoint = +1;
         }
     }
     #endregion
@@ -76,7 +90,7 @@ public class CharacterHandler : MonoBehaviour
         {
             //current health equals 0
             curHealth = 0;
-            Debug.Log("If less than 0 = 0");
+            //Debug.Log("If less than 0 = 0");
         }
         //if the player is alive
         if (alive && curHealth == 0)
@@ -108,7 +122,7 @@ public class CharacterHandler : MonoBehaviour
         //GUI Box for current experience that moves in same place as the background bar
         //current experience divided by the posistion on screen and timesed by the total max experience
         //GUI Draw Texture on the screen that has the mini map render texture attached
-        GUI.DrawTexture(new Rect(13.75f*scrW, 0.25f*scrH, 2*scrW, 2*scrH), miniMap);
+        //GUI.DrawTexture(new Rect(13.75f*scrW, 0.25f*scrH, 2*scrW, 2*scrH), miniMap);
         }
         #endregion
 }

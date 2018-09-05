@@ -12,12 +12,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     public CharacterController controller;
     // Use this for initialization
-    void Start()
-    {
-
-
-
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -32,7 +27,7 @@ public class CharacterMovement : MonoBehaviour
 
             moveDirection *= speed;
 
-            if (Input.GetKey("Space"))
+            if (Input.GetKey(KeyCode.Space))
             {
                 moveDirection.y = jumpspeed;
             }
