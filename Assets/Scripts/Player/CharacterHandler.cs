@@ -18,6 +18,8 @@ public class CharacterHandler : MonoBehaviour
     //max and current health
     public float maxHealth;
     public float curHealth;
+    public float maxMana;
+    public float curMana;
     public GUIStyle healthBar;
     #endregion
     [Header("Levels and Exp")]
@@ -48,7 +50,7 @@ public class CharacterHandler : MonoBehaviour
     private void start()
     {
         //set max health to 100
-        maxHealth = 100f;
+        maxHealth += Constitution *5;
         //set current health to max
         curHealth = maxHealth;
         //make sure player is alive
