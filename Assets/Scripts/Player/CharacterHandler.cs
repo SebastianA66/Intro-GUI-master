@@ -49,10 +49,12 @@ public class CharacterHandler : MonoBehaviour
     #region Start
     private void start()
     {
-        //set max health to 100
+        //set max health to add with constitution
         maxHealth += Constitution *5;
         //set current health to max
         curHealth = maxHealth;
+        //Set max mana to add with wisdom
+        maxMana += Wisdom * 5;
         //make sure player is alive
         alive = true;
         //max exp starts at 60
