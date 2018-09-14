@@ -1390,10 +1390,10 @@ Animator:
   m_GameObject: {fileID: 1190640989}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 133d9703ac9a6f641ba38c5a715609ca, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18075e0e3a461f640ac77023e319c641, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1831,6 +1831,12 @@ MonoBehaviour:
   Charisma: 0
   points: 10
   charClass: 0
+  res: []
+  index: 0
+  showDrop: 0
+  scrollPos: {x: 0, y: 0}
+  resolution: Resolution
+  fullscr: 0
 --- !u!4 &1981245444
 Transform:
   m_ObjectHideFlags: 0
