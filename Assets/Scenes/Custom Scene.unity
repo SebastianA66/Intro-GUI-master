@@ -1055,7 +1055,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1104863779}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.343962, y: -0.09, z: 14.855404}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5.5647044, y: 0.06306, z: 3.7898653}
   m_Children: []
   m_Father: {fileID: 1692925882}
@@ -1140,7 +1140,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1190478442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.2439623, y: -0.15590912, z: 14.905403}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1692925882}
@@ -1407,7 +1407,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1190640989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4, y: 0, z: 4.4}
+  m_LocalPosition: {x: 3.41, y: 0.51, z: 4.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1586112780}
@@ -1615,7 +1615,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1517329526}
   m_LocalRotation: {x: -0.000083570536, y: 0.99990743, z: -0.0072595538, w: 0.011510361}
-  m_LocalPosition: {x: 4.284, y: 1.631, z: 7.857}
+  m_LocalPosition: {x: 4.284, y: 1.423, z: 7.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1768,7 +1768,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1692925881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.573962, y: -0.3840909, z: -10.435404}
+  m_LocalPosition: {x: 3.37, y: 0, z: 4.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1104863780}
@@ -1823,20 +1823,33 @@ MonoBehaviour:
   clothesMax: 11
   armourMax: 11
   charName: Adventurer
-  Strength: 0
-  Dexterity: 0
-  Constitution: 0
-  Intelligence: 0
-  Wisdom: 0
-  Charisma: 0
-  points: 10
+  statArray:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  stats: 000000000000000000000000000000000000000000000000
+  tempStats: 000000000000000000000000000000000000000000000000
+  skillPoint: 10
   charClass: 0
+  selectedClass:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  selectedIndex: 0
   res: []
   index: 0
   showDrop: 0
   scrollPos: {x: 0, y: 0}
   resolution: Resolution
-  fullscr: 0
+  fullScr: 0
 --- !u!4 &1981245444
 Transform:
   m_ObjectHideFlags: 0
