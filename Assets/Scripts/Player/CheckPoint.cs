@@ -39,7 +39,7 @@ public class CheckPoint : MonoBehaviour
         if (charH.curHealth == 0)
         {
             //our transform.position is equal to that of the checkpoint
-            transform.position = curCheckpoint.transform.position;
+            //transform.position = curCheckpoint.transform.position;
             //our characters health is equal to full health
             charH.curHealth = charH.maxHealth;
             //character is alive

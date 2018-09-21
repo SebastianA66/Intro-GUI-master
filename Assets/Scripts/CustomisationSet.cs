@@ -67,6 +67,8 @@ public class CustomisationSet : MonoBehaviour
     #region Start
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         statArray = new string[]
         {
@@ -146,8 +148,12 @@ public class CustomisationSet : MonoBehaviour
     }
     #endregion
 
+    
+
     void ChooseClass(int className)
     {
+        skillPoint = 10;
+
         switch (className)
         {
             case 0:
@@ -393,7 +399,13 @@ public class CustomisationSet : MonoBehaviour
         PlayerPrefs.SetInt("ClothesIndex", clothesIndex);
 
         //SetString CharacterName
-        PlayerPrefs.SetString("CharacterIndex", charName);
+        PlayerPrefs.SetString("CharacterName", charName);
+        for (int i = 0; i < stats.Length; i++)
+        {
+            PlayerPrefs.SetInt(statArray[i], stats[i]);
+        }
+        // Save to regedit a string called CharacterClass with the data selectedClass[selectedIndex] which is our current class
+        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
     }
 
     #endregion
@@ -534,51 +546,56 @@ public class CustomisationSet : MonoBehaviour
             SetTexture("Clothes", clothesIndex = 0);
         }
         i++;
-        //move down the screen with the int using ++ each grouping of GUI elements are moved using this
-        #endregion
         #region Character Name and Save & Play
         //name of our character equals a GUI TextField that holds our character name and limit of characters
         charName = GUI.TextField(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), charName, 16);
-        //move down the screen with the int using ++ each grouping of GUI elements are moved using this
         i++;
         //GUI Button called Save and Play
         if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), "Save & Play"))
         {
             //this button will run the save function and also load into the game level
             Save();
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
+        }
+        i++;
+
+        if (GUI.Button(new Rect(13.25f * scrW, scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), charClass.ToString()))
+        {
+            showDrop = !showDrop;
         }
 
+        if (showDrop)
+        {
+            i++;
+            if (GUI.Button(new Rect(13.25f * scrW, scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), "Barbie girl"))
+            {
+                ChooseClass(0);
+                //charClass = CharacterClass.Barbarian;
+
+
+                showDrop = !showDrop;
+            }
+            i++;
+            if (GUI.Button(new Rect(13.25f * scrW, scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), "Bard"))
+            {
+                ChooseClass(1);
+
+                showDrop = !showDrop;
+
+            }
+        }
+       
+        //move down the screen with the int using ++ each grouping of GUI elements are moved using this
+        #endregion
+        
+        //move down the screen with the int using ++ each grouping of GUI elements are moved using this
+        i++;
+        
+
         #endregion
         #endregion
 
-        //if (GUI.Button(new Rect(scrW, scrH, 5 * scrW, 1f * scrH), button)) //Button with resolution label
-        //{
-        //    showDrop = !showDrop; //Toggle drop down bar
-        //}
-        //if(showDrop)
-        //{
-        //    if(selectedClass.Length <=6)
-        //    {
-        //        scrollPos = GUI.BeginScrollView(new Rect(11.6f * scrW ))
-        //    }
-        //}
-        
-        //if (showDrop) // if drop down bar is on 
-        //{
-        //    scrollPos = GUI.BeginScrollView(new Rect(scrW, 2f * scrH, 3f * scrW, 2.5f * scrH), scrollPos, new Rect(0, 0, 2 * scrW, 3.5f * scrH), false, true); //
-        //    for(int i = 0; i < res.Length; i++)
-        //    {
-        //        if (GUI.Button(new Rect(0, 0 + (0.5f * scrH) * i, 1.75f * scrW, 0.5f * scrH), res[i].x + "x" + res[i].y))
-        //        {
-        //            Screen.SetResolution((int)res[i].x, (int)res[i].y, fullScr);
-        //            showDrop = false;
-        //            resolution = res[i].x + "x" + res[i].y;
-        //
-        //        }
-        //    }
-        //    GUI.EndScrollView();
-        //}
+
 
         GUI.Box(new Rect(3.75f * scrW, 2f * scrH, 2f * scrW, 0.5f * scrH), "Skill Point:" + skillPoint);
 
@@ -593,7 +610,7 @@ public class CustomisationSet : MonoBehaviour
                 }
             }
 
-            GUI.Box(new Rect(3.75f * scrW, 2.5f * scrH + s * (0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ":" + (stats[s] + tempStats[s]));
+            GUI.Box(new Rect(3.75f * scrW, 2.5f * scrH + s * (0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ":" + (stats[s]));
             if (skillPoint < 10 && tempStats[s] > 0)
             {
                 if (GUI.Button(new Rect(3.25f * scrW, 2.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "-"))
@@ -604,11 +621,10 @@ public class CustomisationSet : MonoBehaviour
             }
         }
 
-        //if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset"))
-        //{
-        //    skillPoint = 10;
-        //    tempStats = 
-        //}
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset"))
+        {
+            ChooseClass(0);
+        }
     }
 
 

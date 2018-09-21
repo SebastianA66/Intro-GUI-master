@@ -9,13 +9,13 @@ public class PauseMenu : MonoBehaviour
 
     public bool isPaused = false;
 
-    public void Options()
-    {
-        if (GameObject.Find("Options")); 
-        {
-            
-        }
-    }
+    //public void Options()
+    //{
+    //    if (GameObject.Find("Options")); 
+    //    {
+    //        
+    //    }
+    //}
     
     public void Pause()
     {
