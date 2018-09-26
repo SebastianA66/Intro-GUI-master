@@ -61,6 +61,16 @@ public class CharacterHandler : MonoBehaviour
         maxExp = 60;
         //connect the Character Controller to the controller variable
         controller = this.GetComponent<CharacterController>();
+
+        Strength = PlayerPrefs.GetInt("Strength",10);
+        Dexterity = PlayerPrefs.GetInt("Dexterity",10);
+        Constitution = PlayerPrefs.GetInt("Constitution",10);
+        Intelligence = PlayerPrefs.GetInt("Intelligence",10);
+        Wisdom = PlayerPrefs.GetInt("Wisdom",10);
+        Charisma = PlayerPrefs.GetInt("Charisma",10);
+
+        CharacterClass charClass = (CharacterClass)System.Enum.Parse(typeof(CharacterClass), PlayerPrefs.GetString("CharacterClass", "Barbarian"));
+
     }
     #endregion
     #region Update

@@ -53,6 +53,7 @@ public class CustomisationSet : MonoBehaviour
     public CharacterClass charClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
     public int selectedIndex = 0;
+    public string chooseClass = "Choose Class";
 
     [Header("GUI")]
     public Vector2[] res;
@@ -402,7 +403,7 @@ public class CustomisationSet : MonoBehaviour
         PlayerPrefs.SetString("CharacterName", charName);
         for (int i = 0; i < stats.Length; i++)
         {
-            PlayerPrefs.SetInt(statArray[i], stats[i]);
+            PlayerPrefs.SetInt(statArray[i], stats[i] + tempStats[i]);
         }
         // Save to regedit a string called CharacterClass with the data selectedClass[selectedIndex] which is our current class
         PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
@@ -557,32 +558,65 @@ public class CustomisationSet : MonoBehaviour
             Save();
             SceneManager.LoadScene(1);
         }
+        i = 0;
+        GUI.Box(new Rect(3.75f * scrW, scrH + i * (0.5f * scrH), 2f * scrW, 0.5f * scrH), "Skill Point:" + skillPoint);
+
+        for (int s = 0; s < 6; s++)
+        {
+            if (skillPoint > 0)
+            {
+                if (GUI.Button(new Rect(5.75f * scrW, 1.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "+"))
+                {
+                    skillPoint--;
+                    tempStats[s]++;
+                }
+            }
+
+            GUI.Box(new Rect(3.75f * scrW, 1.5f * scrH + s * (0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ":" + (stats[s]));
+            if (skillPoint < 10 && tempStats[s] > 0)
+            {
+                if (GUI.Button(new Rect(3.25f * scrW, 1.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "-"))
+                {
+                    skillPoint++;
+                    tempStats[s]--;
+                }
+            }
+        }
+        i++;
+        i++;
+        i++;
+        i++;
+        i++;
         i++;
 
-        if (GUI.Button(new Rect(13.25f * scrW, scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), charClass.ToString()))
+        if (GUI.Button(new Rect(3.75f * scrW, 1.5f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset"))
+        {
+            ChooseClass(0);
+        }
+     
+        i = 0;
+        if (GUI.Button(new Rect(13.25f * scrW, 0.25f*scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), chooseClass))
         {
             showDrop = !showDrop;
         }
-
+        i++;
         if (showDrop)
         {
-            i++;
-            if (GUI.Button(new Rect(13.25f * scrW, scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), "Barbie girl"))
+            GUI.BeginScrollView(new Rect(13.25f * scrW, 0.25f * scrH + i * (0.5f * scrH), 2.5f * scrW, 4f * scrH),scrollPos,new Rect(0,0,2.5f*scrW,4*scrH));
+            for (int c = 0; c < selectedClass.Length; c++)
             {
-                ChooseClass(0);
-                //charClass = CharacterClass.Barbarian;
+                if (GUI.Button(new Rect(0, 0 + c * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), selectedClass[c]))
+                {
+                    selectedIndex = c;
+                    ChooseClass(c);
+                    chooseClass = selectedClass[c];
+                    //charClass = CharacterClass.Barbarian;
 
 
-                showDrop = !showDrop;
+                    showDrop = !showDrop;
+                }
             }
-            i++;
-            if (GUI.Button(new Rect(13.25f * scrW, scrH + i * (0.5f * scrH), 2.5f * scrW, 0.5f * scrH), "Bard"))
-            {
-                ChooseClass(1);
-
-                showDrop = !showDrop;
-
-            }
+            GUI.EndScrollView();
         }
        
         //move down the screen with the int using ++ each grouping of GUI elements are moved using this
@@ -597,34 +631,7 @@ public class CustomisationSet : MonoBehaviour
 
 
 
-        GUI.Box(new Rect(3.75f * scrW, 2f * scrH, 2f * scrW, 0.5f * scrH), "Skill Point:" + skillPoint);
-
-        for (int s = 0; s < 6; s++)
-        {
-            if (skillPoint > 0)
-            {
-                if (GUI.Button(new Rect(5.75f * scrW, 2.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "+"))
-                {
-                    skillPoint--;
-                    tempStats[s]++;
-                }
-            }
-
-            GUI.Box(new Rect(3.75f * scrW, 2.5f * scrH + s * (0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ":" + (stats[s]));
-            if (skillPoint < 10 && tempStats[s] > 0)
-            {
-                if (GUI.Button(new Rect(3.25f * scrW, 2.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "-"))
-                {
-                    skillPoint++;
-                    tempStats[s]--;
-                }
-            }
-        }
-
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset"))
-        {
-            ChooseClass(0);
-        }
+     
     }
 
 
