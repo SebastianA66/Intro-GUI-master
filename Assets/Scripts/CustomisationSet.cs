@@ -572,7 +572,7 @@ public class CustomisationSet : MonoBehaviour
                 }
             }
 
-            GUI.Box(new Rect(3.75f * scrW, 1.5f * scrH + s * (0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ":" + (stats[s]));
+            GUI.Box(new Rect(3.75f * scrW, 1.5f * scrH + s * (0.5f * scrH), 2f * scrW, 0.5f * scrH), statArray[s] + ":" + (stats[s]+tempStats[s]));
             if (skillPoint < 10 && tempStats[s] > 0)
             {
                 if (GUI.Button(new Rect(3.25f * scrW, 1.5f * scrH + s * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "-"))
@@ -592,6 +592,13 @@ public class CustomisationSet : MonoBehaviour
         if (GUI.Button(new Rect(3.75f * scrW, 1.5f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset"))
         {
             ChooseClass(0);
+            skillPoint = 10;
+            for (int s = 0; s < 6; s++)
+            {
+            tempStats[s] = 0;
+
+            }
+
         }
      
         i = 0;
