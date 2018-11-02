@@ -11,8 +11,12 @@ public class CharacterMovement : MonoBehaviour
     public float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
     public CharacterController controller;
-    // Use this for initialization
     
+
+    private void Start()
+    {
+        controller = this.GetComponent<CharacterController>();
+    }
 
     // Update is called once per frame
     void Update()

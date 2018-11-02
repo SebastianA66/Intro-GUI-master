@@ -35,37 +35,37 @@ public class CheckPoint : MonoBehaviour
     #region Update
     private void Update()
     {
-        //if our characters health is equal to 0
-        if (charH.curHealth == 0)
-        {
-            //our transform.position is equal to that of the checkpoint
-            //transform.position = curCheckpoint.transform.position;
-            //our characters health is equal to full health
-            charH.curHealth = charH.maxHealth;
-            //character is alive
-            charH.alive = true;
-            //characters controller is active	
-            charH.controller.enabled = true;
-        }
+        ////if our characters health is equal to 0
+        //if (charH.curHealth == 0)
+        //{
+        //    //our transform.position is equal to that of the checkpoint
+        //    transform.position = curCheckpoint.transform.position;
+        //    //our characters health is equal to full health
+        //    charH.curHealth = charH.maxHealth;
+        //    //character is alive
+        //    charH.alive = true;
+        //    //characters controller is active	
+        //    charH.controller.enabled = true;
+        //}
 
 
     }
 
     #endregion
     #region OnTriggerEnter
-    private void OnTriggerEnter(Collider other)
-    {
-        //Collider other
-        //if our other objects tag when compared is CheckPoint
-        if(other.CompareTag("Checkpoint"))
-        {
-            //our checkpoint is equal to the other object
-            curCheckpoint = other.gameObject;
-            //save our SpawnPoint as the name of that object
-            PlayerPrefs.SetString("SpawnPoint", curCheckpoint.name);
-        }
-
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    //Collider other
+    //    //if our other objects tag when compared is CheckPoint
+    //    if(other.CompareTag("Checkpoint"))
+    //    {
+    //        //our checkpoint is equal to the other object
+    //        curCheckpoint = other.gameObject;
+    //        //save our SpawnPoint as the name of that object
+    //        PlayerPrefs.SetString("SpawnPoint", curCheckpoint.name);
+    //    }
+    //
+    //}
 
     #endregion
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static bool paused;
+    public static bool showOptions;
     public GameObject pauseMenu;
     public GameObject optionsPanel;
 
@@ -19,13 +21,23 @@ public class PauseMenu : MonoBehaviour
     
     public void Pause()
     {
-        if (isPaused)
+        if (isPaused && !showOptions && !Inventory.showInv)
         {
             Time.timeScale = 1;
             isPaused = false;
             pauseMenu.SetActive(false);
         }
-        else
+        else if (paused && !showOptions)
+        {
+            OptionToggle();
+            pauseMenu.SetActive(true);
+        }
+        else if(paused && !showOptions && Inventory.showInv)
+        {
+            isPaused = false;
+            pauseMenu.SetActive(false);
+        }
+        else 
         {
             Time.timeScale = 0;
             isPaused = true;
@@ -43,7 +55,7 @@ public class PauseMenu : MonoBehaviour
 
     void OptionToggle()
     {
-
+        
     }
 
     private void Start()

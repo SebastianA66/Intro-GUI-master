@@ -16,8 +16,8 @@ public class CharacterHandler : MonoBehaviour
     [Header("Health")]
     #region Health
     //max and current health
-    public float maxHealth;
-    public float curHealth;
+    public static float maxHealth;
+    public static float curHealth;
     public float maxMana;
     public float curMana;
     public GUIStyle healthBar;
@@ -129,7 +129,7 @@ public class CharacterHandler : MonoBehaviour
             //GUI Box on screen for the healthbar background
             GUI.Box(new Rect(6*scrW, 0.25f* scrH,4* scrW,0.5f* scrH), "");
             //GUI Box for current health that moves in same place as the background bar
-            //GUI.Box(new Rect(6 * scrW, 0.25f * scrH, curHealth(4 * scrW) / maxHealth, 0.25f * scrH), "" , healthBar);
+           // GUI.Box(new Rect(6 * scrW, 0.25f * scrH, curHealth(4 * scrW) / maxHealth, 0.25f * scrH), "" , healthBar);
             //current Health divided by the posistion on screen and timesed by the total max health
            // GUI.Box(new Rect(6 * scrW, 0.75f * scrH, curExp(4 * scrW)/maxExp, 0.25f * scrH), "");
         //GUI Box on screen for the experience background
