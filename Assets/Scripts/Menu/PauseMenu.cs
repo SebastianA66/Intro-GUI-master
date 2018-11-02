@@ -1,70 +1,78 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[AddComponentMenu("Skyrim2.0/Menus/Pause")]
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool paused;
     public static bool showOptions;
     public GameObject pauseMenu;
-    public GameObject optionsPanel;
+    public GameObject optionsMenu;
 
-    public bool isPaused = false;
-
-    //public void Options()
-    //{
-    //    if (GameObject.Find("Options")); 
-    //    {
-    //        
-    //    }
-    //}
     
-    public void Pause()
+    void Start()
     {
-        if (isPaused && !showOptions && !Inventory.showInv)
+        Time.timeScale = 1;
+        paused = false;
+        pauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
         {
+            TogglePause();
+        }
+    }
+
+    public void ToggleOptions()
+    {
+        if(showOptions)
+        {
+            showOptions = false;
+        }
+        else
+        {
+            showOptions = true;
+            pauseMenu.SetActive(showOptions);
+        }
+        optionsMenu.SetActive(showOptions);
+    }
+
+    public void TogglePause()
+    {
+        if (paused && !showOptions && !Inventory.showInv)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Time.timeScale = 1;
-            isPaused = false;
+            paused = false;
             pauseMenu.SetActive(false);
         }
         else if (paused && !showOptions)
         {
-            OptionToggle();
+            ToggleOptions();
             pauseMenu.SetActive(true);
         }
         else if(paused && !showOptions && Inventory.showInv)
         {
-            isPaused = false;
+            paused = false;
             pauseMenu.SetActive(false);
         }
         else 
         {
             Time.timeScale = 0;
-            isPaused = true;
+            paused = true;
             pauseMenu.SetActive(true);
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            Pause();
-        }
-    }
+   
+    
 
-    void OptionToggle()
-    {
-        
-    }
-
-    private void Start()
-    {
-        Time.timeScale = 1;
-
-        pauseMenu = GameObject.Find("Pause");
-        //optionsPanel = 
-
-        //pauseMenu.SetActive(false);
-    }
+   
 }
