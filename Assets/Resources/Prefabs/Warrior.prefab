@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 143706598157553162}
   - component: {fileID: 114774796230164328}
   - component: {fileID: 114262195025725186}
+  - component: {fileID: 114704299730916710}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -1160,7 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpspeed: 8
+  jumpSpeed: 8
   gravity: 20
   controller: {fileID: 143706598157553162}
 --- !u!114 &114692705776221458
@@ -1176,8 +1177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alive: 0
   controller: {fileID: 0}
-  maxHealth: 100
-  curHealth: 100
+  maxMana: 0
+  curMana: 0
   healthBar:
     m_Name: Health
     m_Normal:
@@ -1256,6 +1257,25 @@ MonoBehaviour:
   Wisdom: 0
   Charisma: 0
   miniMap: {fileID: 8400000, guid: 474cdfdd37afdec48b55abbf22902dc5, type: 2}
+--- !u!114 &114704299730916710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139585719657436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a386899ff2ef4c24d9c0ce4db2eef876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showInv: 0
+  slotX: 0
+  slotY: 0
+  isDragging: 0
+  draggedFrom: 0
+  droppedItem: {fileID: 0}
+  toolTipItem: 0
+  showToolTip: 0
 --- !u!114 &114774796230164328
 MonoBehaviour:
   m_ObjectHideFlags: 1

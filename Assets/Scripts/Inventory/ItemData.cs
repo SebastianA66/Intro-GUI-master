@@ -96,8 +96,8 @@ public static class ItemData
                 armour = 20;
                 amount = 1;
                 heal = 0;
-                icon = "Apple_Icon";
-                mesh = "Apple_Mesh";
+                icon = "IronHelmet_Icon";
+                mesh = "IronHelmet_Mesh";
                 type = ItemTypes.Armour;
                 break;
             #endregion

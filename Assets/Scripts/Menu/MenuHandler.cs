@@ -106,18 +106,14 @@ public class MenuHandler : MonoBehaviour
         dirLight.intensity = brightSlider.value;
     }
 
-    //public void Resolution()
-    //{
-    //    Resolution[] resolution = Screen.resolutions;
-    //    foreach (Resolution res in resolution)
-    //    {
-    //        print(message: res.width = "x" + res.height);
-    //    }
-    //
-    //    Screen.SetResolution(resolution[0].width, resolution[0].height, true);
-    //    //resIndex = resDropDown.value;
-    //    //Screen.SetResolution((int)res[resIndex].x, (int)res[resIndex].y, isFullscreen);
-    //}
+    
+
+    public void Resolution()
+    {
+        resIndex = resDropDown.value;
+        Screen.SetResolution((int)res[resIndex].x, (int)res[resIndex].y, isFullscreen);
+    }
+    
     
     public void Save()
     {

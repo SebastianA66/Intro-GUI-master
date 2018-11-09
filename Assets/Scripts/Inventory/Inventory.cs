@@ -14,10 +14,19 @@ public class Inventory : MonoBehaviour
     public Vector2 scrollPos = Vector2.zero; // Scroll bar position
 
     public string sortType = "All";
+
+    public Transform dropLocation;
+    public Transform[] EquippedLocation;
+    public GameObject curWeapon;
+    public GameObject curHelm;
+
+    // 0 = Right Hand // Weapon
+    // 1 = Head // Helmet
     #endregion
 
     void Start()
     {
+        showInv = false;
         inv.Add(ItemData.CreateItem(0));
         inv.Add(ItemData.CreateItem(2));
         inv.Add(ItemData.CreateItem(102));
@@ -25,7 +34,7 @@ public class Inventory : MonoBehaviour
         inv.Add(ItemData.CreateItem(202));
         inv.Add(ItemData.CreateItem(301));
         inv.Add(ItemData.CreateItem(401));
-        
+
 
         for (int i = 0; i < inv.Count; i++)
         {
@@ -38,6 +47,8 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            ToggleInv();
+            Debug.Log("Inventory");
             if (PauseMenu.paused)
             {
                 ToggleInv();
@@ -54,7 +65,7 @@ public class Inventory : MonoBehaviour
                 inv.Add(ItemData.CreateItem(202));
                 inv.Add(ItemData.CreateItem(301));
                 inv.Add(ItemData.CreateItem(401));
-                
+
 
             }
         }
@@ -90,7 +101,7 @@ public class Inventory : MonoBehaviour
                     scr.x = Screen.width / 16;
                     scr.y = Screen.height / 9;
                 }
-                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Inventory");
+                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "List Inventory");
                 if (GUI.Button(new Rect(5.5f * scr.x, 0.25f * scr.y, scr.x, 0.25f * scr.y), "All"))
                 {
                     sortType = "All";
@@ -125,15 +136,32 @@ public class Inventory : MonoBehaviour
                 if (selectedItem != null)
                 {
                     GUI.DrawTexture(new Rect(11 * scr.x, 1.5f * scr.y, 2 * scr.x, 2 * scr.y), selectedItem.Icon);
-                    if (selectedItem.Type != ItemTypes.Quest)
+                    if (GUI.Button(new Rect(14 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Discard"))
                     {
-                        if (GUI.Button(new Rect(14 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Discard"))
+                        if(curWeapon != null && selectedItem.MeshName == curWeapon.name)
+                        {
+                            Destroy(curWeapon);
+                        }
+                        else if(curHelm != null && selectedItem.MeshName == curHelm.name)
+                        {
+                            Destroy(curHelm);
+                        }
+
+                        GameObject clone = Instantiate(Resources.Load("Prefab/" + selectedItem.MeshName) as GameObject, dropLocation.position, Quaternion.identity);
+                        clone.AddComponent<Rigidbody>().useGravity = true;
+                        if (selectedItem.Amount > 1)
+                        {
+                            selectedItem.Amount--;
+                        }
+                        else
                         {
                             // Spawn item on ground
                             inv.Remove(selectedItem);
                             selectedItem = null;
                             return;
                         }
+
+
                     }
 
                     switch (selectedItem.Type)
@@ -145,7 +173,7 @@ public class Inventory : MonoBehaviour
                             {
                                 if (GUI.Button(new Rect(15 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
                                 {
-                                    if(selectedItem.Amount > 1)
+                                    if (selectedItem.Amount > 1)
                                     {
                                         selectedItem.Amount--;
                                     }
@@ -176,11 +204,22 @@ public class Inventory : MonoBehaviour
                             break;
                         case ItemTypes.Weapon:
                             GUI.Box(new Rect(8 * scr.x, 5 * scr.y, 8 * scr.x, 3 * scr.y), selectedItem.Name + "\n" + selectedItem.Description + "\nValue:" + selectedItem.Value + "\nDamage:" + selectedItem.Damage);
-
-                            if (GUI.Button(new Rect(15 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Equip"))
+                            if (curWeapon == null || selectedItem.MeshName != curWeapon.name)
                             {
-
+                                if (GUI.Button(new Rect(15 * scr.x, 8.75f * scr.y, scr.x, 0.25f * scr.y), "Equip"))
+                                {
+                                    // use and spawn to character
+                                    if (curWeapon != null)
+                                    {
+                                        Destroy(curWeapon);
+                                    }
+                                    curWeapon = Instantiate(Resources.Load("Prefab/" + selectedItem.MeshName) as GameObject, EquippedLocation[0]);
+                                    curWeapon.GetComponent<ItemHandler>().enabled = false;
+                                    curWeapon.name = selectedItem.MeshName;
+                                }
                             }
+
+
                             break;
                         case ItemTypes.Misc:
 
@@ -220,7 +259,7 @@ public class Inventory : MonoBehaviour
             {
                 for (int i = 0; i < inv.Count; i++) // we filter through all items
                 {
-                    if(inv[i].Type == type) // if it is of type
+                    if (inv[i].Type == type) // if it is of type
                     {
                         if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + a * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name)) // We display a button that is of this type and slot it under the last using s as our height
                         {
@@ -230,7 +269,7 @@ public class Inventory : MonoBehaviour
                         s++; // Once added increase our s
                         // Each new thing goes under the last
                     }
-                    
+
                 }
 
             }
@@ -240,9 +279,9 @@ public class Inventory : MonoBehaviour
                 scrollPos = GUI.BeginScrollView(new Rect(0, 0.25f * scr.y, 3.75f * scr.x, 8.75f * scr.y), scrollPos, new Rect(0, 0, 0, 8.75f * scr.y + ((a - 36) * (0.25f * scr.y))), false, true);
                 #region Items in Viewing Area
 
-                for(int i = 0; i < inv.Count; i++) // Loop throw all items
+                for (int i = 0; i < inv.Count; i++) // Loop throw all items
                 {
-                    if(inv[i].Type == type) // If it is of type
+                    if (inv[i].Type == type) // If it is of type
                     {
                         if (GUI.Button(new Rect(0.5f * scr.x, 0 * scr.y + a * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name)) // We display a button that is of this type and slot it under the last using s as our height
                         {
@@ -291,7 +330,7 @@ public class Inventory : MonoBehaviour
                 GUI.EndScrollView();
                 #endregion
             }
-        }       
+        }
 
     }
 }
